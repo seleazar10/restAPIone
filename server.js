@@ -1,6 +1,7 @@
 var express = require ("express");
 var path = require('path')
 var mongoose = require('mongoose')
+require('dotenv/config')
 var app = express()
 
 
@@ -17,7 +18,15 @@ app.get('/posts', function(req, res){
 })
 
 
-mongoose.connect('')
+// mongoose.connect('mongodb+srv://stel10:<password>@stel10-fy1rj.mongodb.net/admin?retryWrites=true&w=majority', { useNewUrlParser: true }, function(){
+//     console.log('connected to mongo')
+// })
+
+mongoose.connect(
+    process.env.DB_CONNECTION
+    { useNewUrlParser: true }, function(){
+    console.log('connected to mongo')
+})
 
 
 
