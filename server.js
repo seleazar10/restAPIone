@@ -5,17 +5,27 @@ require('dotenv/config')
 var app = express()
 
 
+const postsRoute = require('./routes/posts')
+
+const userRoute = require('./routes/user')
+
+
+
+
 app.use(express.json());
+
+app.use('/posts', postsRoute)
+app.use('/user', userRoute)
 
 var PORT = process.env.PORT || 3000
 
 
-app.get('/', function(req, res){
-    res.send('we are home')
-})
-app.get('/posts', function(req, res){
-    res.send('we are on posts')
-})
+// app.get('/', function(req, res){
+//     res.send('we are home')
+// })
+// app.get('/posts', function(req, res){
+//     res.send('we are on posts')
+// })
 
 
 // mongoose.connect('mongodb+srv://stel10:<password>@stel10-fy1rj.mongodb.net/admin?retryWrites=true&w=majority', { useNewUrlParser: true }, function(){
@@ -23,7 +33,7 @@ app.get('/posts', function(req, res){
 // })
 
 mongoose.connect(
-    process.env.DB_CONNECTION
+    process.env.DB_CONNECTION,
     { useNewUrlParser: true }, function(){
     console.log('connected to mongo')
 })
@@ -38,44 +48,40 @@ mongoose.connect(
 
 
 
-app.get('/index', function(req, res){
-    res.sendFile(path.join(__dirname, 'index.html'))
+// app.get('/index', function(req, res){
+//     res.sendFile(path.join(__dirname, 'index.html'))
 
-})
-
-
-var people = []
+// })
 
 
-app.get('/people', function(req, res){
-    // res.send('mariah is awesome')
-    res.send(people)
-    
-})
+// var people = []
 
 
-app.post('/people', function(req, res){
 
-    var toSend = req.body
-    console.log(toSend)
 
-    var person = {
 
-        name: req.body.name,
-        gender: req.body.gender
+// app.post('/people', function(req, res){
 
-    }
+//     var toSend = req.body
+//     console.log(toSend)
 
-    // console.log(name)
-    // console.log(gender)
+//     var person = {
 
-    people.push(person)
-    // if(err) throw err
-    console.log('pushed data')
+//         name: req.body.name,
+//         gender: req.body.gender
+
+//     }
+
+//     // console.log(name)
+//     // console.log(gender)
+
+//     people.push(person)
+//     // if(err) throw err
+//     console.log('pushed data')
     
     
 
-})
+// })
 
 app.listen(PORT, function(err){
     if(err) throw err
