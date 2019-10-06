@@ -1,0 +1,15 @@
+GET http://localhost:3000/
+
+
+###
+GET http://localhost:3000/posts
+
+###
+
+POST http://localhost:3000/posts
+Content-Type: application/json
+
+{
+    "name": "john smith",
+    "gender": "male"
+}
