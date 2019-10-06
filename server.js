@@ -1,5 +1,6 @@
 var express = require ("express");
 var path = require('path')
+var mongoose = require('mongoose')
 var app = express()
 
 
@@ -7,22 +8,44 @@ app.use(express.json());
 
 var PORT = process.env.PORT || 3000
 
-var people = []
-
 
 app.get('/', function(req, res){
-    // res.send('mariah is awesome')
-    res.send(people)
-    
+    res.send('we are home')
+})
+app.get('/posts', function(req, res){
+    res.send('we are on posts')
 })
 
-app.get('/posts', function(req, res){
+
+mongoose.connect('')
+
+
+
+
+
+
+
+
+
+
+
+app.get('/index', function(req, res){
     res.sendFile(path.join(__dirname, 'index.html'))
 
 })
 
 
-app.post('/posts', function(req, res){
+var people = []
+
+
+app.get('/people', function(req, res){
+    // res.send('mariah is awesome')
+    res.send(people)
+    
+})
+
+
+app.post('/people', function(req, res){
 
     var toSend = req.body
     console.log(toSend)
