@@ -14,8 +14,8 @@ const userRoute = require('./routes/user')
 
 app.use(express.json());
 
-app.use('/posts', postsRoute)
-app.use('/user', userRoute)
+app.use('/test', postsRoute)
+// app.use('/user', userRoute)
 
 var PORT = process.env.PORT || 3000
 

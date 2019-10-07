@@ -7,13 +7,37 @@ const Post = require('../models/Post');
 
 
 
-router.get('/', function(req, res){
-    res.send('we are on posts')
+router.get('/', async function(req, res){
+    try{
+        const posts = await Post.find()
+        res.json(posts)
+    }catch(err){
+        res.json({message:err})
+        
+    }
 })
 
-router.post('/', function(req, res){
+router.post('/', async function(req, res){
     var toSend = req.body;
     console.log(toSend)
+
+    var post = new Post({
+        title: req.body.title,
+        description: req.body.description
+    })
+
+
+    try{
+        const savedPost = await post.save();
+        res.json(savedPost)
+
+    }catch(err){
+        res.json({message: err})
+    }
+
+
+
+
 })
 
 
